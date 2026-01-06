@@ -1,0 +1,382 @@
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import AppContextProvider from "./context/AppContext";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import Dashboard from "./components/Dashboard";
+import TaskAssign from "./components/TaskAssign";
+import CategoryList from "./components/category/CategoryList.jsx";
+import RoomList from "./components/room/RoomList";
+import LoginPage from "./components/login/LoginPage";
+import StaffList from "./components/staff/StaffList";
+import BookingForm from "./components/booking/BookingForm";
+import Booking from "./components/booking/Booking";
+import EditBookingForm from "./components/booking/EditBookingForm";
+import CheckoutPage from "./components/booking/CheckoutPage";
+import RoomInspection from "./components/RoomInspection";
+import Reservation from "./components/reservation/Reservation";
+import ReservationForm from "./components/reservation/Reservationform";
+
+import Order from "./components/laundary/Order.jsx";
+import Inventory from "./components/laundary/Inventory.jsx";
+import Loss from "./components/laundary/Loss.jsx";
+import Vendor from "./components/laundary/Vendor.jsx";
+import { useNavigate } from "react-router-dom";
+import Cabbookingform from "./components/cab/cabbookingform.jsx";
+import Cab from "./components/cab/cab.jsx";
+import Vehile from "./components/cab/Vehicle.jsx";
+import Driver from "./components/cab/Driver.jsx";
+import PantryItems from "./components/Pantry/Item.jsx";
+import PantryOrders from "./components/Pantry/Order.jsx";
+import PantryVendors from "./components/Pantry/Vendor.jsx";
+import CategoryPage from "./components/Pantry/CategoryPage.jsx";
+import PantryDashboard from "./components/Pantry/PantryDashboard.jsx";
+import Resturant from "./components/Resturant/Resturant.jsx";
+import StaffWorkTask from "./components/StaffWorkTask";
+import Orders from "./components/Resturant/Allorders.jsx";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Menu from "./components/Resturant/Menu.jsx";
+import Table from "./components/Resturant/Table.jsx";
+import RestaurantBooking from "./components/Resturant/RestaurantBooking.jsx";
+import Category from "./components/Resturant/Category.jsx";
+import BookTable from "./components/Resturant/ResturantOrders.jsx";
+import KOT from "./components/Resturant/KOT.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Customer from "./components/Customer.jsx";
+import Resturantreservation from "./components/Resturant/Resturantreservation.jsx";
+
+import Payment from "./components/payment/Payment.jsx";
+import Invoice from "./components/restaurant/Invoice.jsx";
+import POSInvoice from "./components/POSInvoice.jsx";
+import Users from "./components/Users/Users.jsx";
+import AddBooking from "./components/Banquet/pages/Students/AddBooking.jsx";
+import ListBooking from "./components/Banquet/pages/Students/ListBooking.jsx";
+import UpdateBooking from "./components/Banquet/pages/Students/UpdateBooking.jsx";
+import BanquetInvoice from "./components/Banquet/pages/Students/Invoice.jsx";
+import SharedInvoice from "./components/Banquet/pages/Students/SharedInvoice.jsx";
+import MenuItemManager from "./components/Banquet/components/MenuItemManager.jsx";
+import PlanLimitManager from "./components/Banquet/components/PlanLimitManager.jsx";
+import MenuPlanManager from "./components/Banquet/components/MenuPlanManager.jsx";
+import LaganCalendar from "./components/Banquet/pages/Calendar/LaganCalendar.jsx";
+import MenuSelectorPage from "./components/Banquet/pages/Menu/MenuSelector.jsx";
+import MenuView from "./components/Banquet/pages/Students/MenuView.jsx";
+import SettingsPage from "./components/Settings/SettingsPage.jsx";
+import GeneralSettings from "./components/Settings/GeneralSettings.jsx";
+import BusinessSettings from "./components/Settings/BusinessSettings.jsx";
+import UserSettings from "./components/Settings/UserSettings.jsx";
+import NotificationSettings from "./components/Settings/NotificationSettings.jsx";
+import OperationalSettings from "./components/Settings/OperationalSettings.jsx";
+import SecuritySettings from "./components/Settings/SecuritySettings.jsx";
+import DataBackupSettings from "./components/Settings/DataBackupSettings.jsx";
+import IntegrationSettings from "./components/Settings/IntegrationSettings.jsx";
+import HelpSupport from "./components/HelpSupport.jsx";
+import WastageForm from "./components/Wastage/WastageForm.jsx";
+import InventoryForm from "./components/Inventory/InventoryForm.jsx";
+import StaffDashboard from "./components/staff/StaffDashboard.jsx";
+import AttendanceForm from "./components/staff/AttendanceForm.jsx";
+import PayrollForm from "./components/staff/PayrollForm.jsx";
+import AttendanceTable from "./components/staff/AttendanceTable.jsx";
+import StaffClockDashboard from "./components/staff/StaffClockDashboard.jsx";
+import AttendanceManager from "./components/staff/AttendanceManager.jsx";
+import RestaurantDashboard from "./components/restaurant/RestaurantDashboard.jsx";
+import ManageTables from "./components/restaurant/ManageTables.jsx";
+import AvailableTables from "./components/restaurant/AvailableTables.jsx";
+import EasyDashboard from "./components/easy dashboard/easydashboard.jsx";
+import CashManagement from "./components/CashManagement/CashManagement.jsx";
+import RegisterForm from "./components/auth/RegisterForm.jsx";
+import Kitchen from "./components/Kitchen.jsx";
+import KitchenStore from "./components/KitchenStore.jsx";
+import KitchenConsumption from "./components/KitchenConsumption.jsx";
+import ChefDashboard from "./components/Resturant/ChefDashboard.jsx";
+import RoomService from "./components/room/RoomService.jsx";
+import RoomServiceBilling from "./components/room/RoomServiceBilling.jsx";
+import SaleBill from "./components/room/SaleBill.jsx";
+import BillLookup from "./components/room/BillLookup.jsx";
+// import CategoryMenu from"./components/Banquet/Students/CategoryMenu.jsx"
+const BookingFormPage = () => {
+  const navigate = useNavigate();
+  return <BookingForm onClose={() => navigate("/booking")} />;
+};
+const AuthRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
+const App = () => {
+  return (
+    <AppContextProvider>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route
+          path="/*"
+          element={
+            <AuthRoute>
+              <div className="flex h-screen bg-app-gradient font-sans">
+                <Sidebar />
+                <div className="flex-1 flex flex-col overflow-hidden">
+                  <Header />
+                  <main className="flex-1 overflow-y-auto">
+                    <Routes>
+                      <Route path="/" element={<Navigate to={(() => {
+                        const role = localStorage.getItem("role");
+                        const restaurantRole = localStorage.getItem("restaurantRole");
+                        if (role === "restaurant" && (restaurantRole === "cashier" || restaurantRole === "staff")) {
+                          return "/restaurant/available-tables";
+                        }
+                        return "/dashboard";
+                      })()} replace />} />
+                      <Route path="/dashboard" element={<Dashboard />} />
+                      <Route
+                        path="/pantry/dashboard"
+                        element={<PantryDashboard />}
+                      />
+                      <Route path="/pantry/item" element={<PantryItems />} />
+                      <Route
+                        path="/pantry/category"
+                        element={<CategoryPage />}
+                      />
+                      <Route path="/pantry/orders" element={<PantryOrders />} />
+                      <Route
+                        path="/pantry/vendors"
+                        element={<PantryVendors />}
+                      />
+                      <Route path="/kitchen" element={<Kitchen />} />
+                      <Route path="/kitchen-store" element={<KitchenStore />} />
+                      <Route path="/kitchen-consumption" element={<KitchenConsumption />} />
+                      <Route path="/tasks" element={<TaskAssign />} />
+                      <Route path="/category" element={<CategoryList />} />
+                      <Route path="/room" element={<RoomList />} />
+                      <Route path="/staff" element={<StaffList />} />
+                      <Route
+                        path="/bookingform"
+                        element={<BookingFormPage />}
+                      />
+                      <Route path="/booking" element={<Booking />} />
+                      <Route path="/edit-booking" element={<EditBookingForm />} />
+                      <Route
+                        path="/room-inspection"
+                        element={<RoomInspection />}
+                      />
+                      <Route path="/checkout" element={<CheckoutPage />} />
+                      <Route path="/reservation" element={<Reservation />} />
+                      <Route
+                        path="/reservationform"
+                        element={<ReservationForm />}
+                      />
+                      <Route
+                        path="/laundry/ordermanagement"
+                        element={<Order />}
+                      />
+                      <Route
+                        path="/laundry/inventorymanagement"
+                        element={<Inventory />}
+                      />
+                      <Route path="/laundry/loss" element={<Loss />} />
+                      <Route path="/laundry/vendor" element={<Vendor />} />
+                      <Route path="/cab" element={<Cab />} />
+                      <Route
+                        path="/cabbookingform"
+                        element={<Cabbookingform />}
+                      />
+                      <Route path="/cab/vehicle" element={<Vehile />} />
+                      <Route path="/cab/driver" element={<Driver />} />
+                      <Route path="/resturant" element={<Resturant />} />
+                      <Route
+                        path="/staff-work"
+                        element={
+                          <ProtectedRoute allowedRoles={["staff", "admin"]}>
+                            <StaffWorkTask />
+                          </ProtectedRoute>
+                        }
+                      />
+
+                      <Route path="/menu" element={<Menu />} />
+                      <Route path="/table" element={<Table />} />
+                      <Route
+                        path="/restaurant/manage-tables"
+                        element={<ManageTables />}
+                      />
+                      <Route
+                        path="/restaurant/available-tables"
+                        element={<AvailableTables />}
+                      />
+                      <Route
+                        path="/resturant/bookings"
+                        element={<RestaurantBooking />}
+                      />
+                      <Route
+                        path="/resturant/category"
+                        element={<Category />}
+                      />
+                      <Route path="/book-table" element={<BookTable />} />
+                      <Route path="/customers" element={<Customer />} />
+                      <Route
+                        path="/resturant/order-table"
+                        element={<BookTable />}
+                      />
+                      <Route
+                        path="/resturant/all-orders"
+                        element={<Orders />}
+                      />
+                      <Route path="/kot" element={<KOT />} />
+                      <Route
+                        path="/resturant/reservation"
+                        element={<Resturantreservation />}
+                      />
+
+                      <Route
+                        path="/chef-dashboard"
+                        element={<ChefDashboard />}
+                      />
+                      <Route path="/payment" element={<Payment />} />
+                      <Route path="/invoice" element={<Invoice />} />
+                      <Route path="/pos-invoice" element={<POSInvoice />} />
+                      <Route path="/users" element={<Users />} />
+                      <Route path="/add-booking" element={<AddBooking />} />
+                      <Route
+                        path="/banquet/add-booking"
+                        element={<AddBooking />}
+                      />
+                      <Route
+                        path="/banquet/list-booking"
+                        element={<ListBooking />}
+                      />
+                      <Route
+                        path="/banquet/update-booking/:id"
+                        element={<UpdateBooking />}
+                      />
+                      <Route
+                        path="/banquet/invoice/:id"
+                        element={<BanquetInvoice />}
+                      />
+                      <Route
+                        path="/shared-invoice/:id"
+                        element={<SharedInvoice />}
+                      />
+                      <Route
+                        path="/banquet/menu-manager"
+                        element={<MenuItemManager />}
+                      />
+                      <Route
+                        path="/banquet/plan-limit"
+                        element={<PlanLimitManager />}
+                      />
+                      <Route
+                        path="/banquet/menu-plan-manager"
+                        element={<MenuPlanManager />}
+                      />
+                      <Route
+                        path="/banquet/menu-selector"
+                        element={<MenuSelectorPage />}
+                      />
+                      <Route
+                        path="/banquet/menu-view/:id"
+                        element={<MenuView />}
+                      />
+                      <Route
+                        path="/banquet/calendar"
+                        element={<LaganCalendar />}
+                      />
+                      <Route path="/settings" element={<SettingsPage />} />
+                      <Route
+                        path="/settings/general"
+                        element={<GeneralSettings />}
+                      />
+                      <Route
+                        path="/settings/business"
+                        element={<BusinessSettings />}
+                      />
+                      <Route
+                        path="/settings/users"
+                        element={<UserSettings />}
+                      />
+                      <Route
+                        path="/settings/notifications"
+                        element={<NotificationSettings />}
+                      />
+                      <Route
+                        path="/settings/operational"
+                        element={<OperationalSettings />}
+                      />
+                      <Route
+                        path="/settings/security"
+                        element={<SecuritySettings />}
+                      />
+                      <Route
+                        path="/settings/data"
+                        element={<DataBackupSettings />}
+                      />
+                      <Route
+                        path="/settings/integrations"
+                        element={<IntegrationSettings />}
+                      />
+                      <Route path="/help" element={<HelpSupport />} />
+                      <Route path="/wastage" element={<WastageForm />} />
+                      <Route path="/inventory" element={<InventoryForm />} />
+                      <Route
+                        path="/staff-dashboard"
+                        element={<StaffDashboard />}
+                      />
+                      <Route
+                        path="/staff/attendance"
+                        element={<AttendanceForm />}
+                      />
+                      <Route path="/staff/payroll" element={<PayrollForm />} />
+                      <Route path="/staff/attendance-table" element={<AttendanceTable />} />
+                      <Route path="/staff/clock-dashboard" element={<StaffClockDashboard />} />
+                      <Route path="/staff/attendance-manager" element={<AttendanceManager />} />
+                      <Route path="/resturant/dashboard" element={<RestaurantDashboard />} />
+                      <Route path="/easy-dashboard" element={<EasyDashboard />} />
+                      <Route path="/room-service" element={<RoomService />} />
+                      <Route path="/room-service-billing" element={<RoomServiceBilling />} />
+                      <Route path="/sale-bill" element={<SaleBill />} />
+                      <Route path="/bill-lookup" element={<BillLookup />} />
+                      <Route 
+                        path="/cash-management" 
+                        element={
+                          <ProtectedRoute
+                            allowedRoles={["admin", "staff", "restaurant"]}
+                          >
+                            <CashManagement />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/register"
+                        element={
+                          <ProtectedRoute allowedRoles={["admin"]}>
+                            <RegisterForm />
+                          </ProtectedRoute>
+                        }
+                      />
+
+
+                      {/* <Route path="/banquet/categorymenu" element={<CategoryMenu />} /> */}
+                    </Routes>
+                  </main>
+                </div>
+              </div>
+            </AuthRoute>
+          }
+        />
+      </Routes>
+    </AppContextProvider>
+  );
+};
+export default App;
